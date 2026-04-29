@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function Header() {
   return (
-    <div className="bg-amber-50 border-b justify-between items-center flex flex-row w-full p-4 px-8 text-black">
+    <div className="bg-[#0F2040] border-b justify-between items-center flex flex-row w-full p-4 px-8 text-white border-[#1A2E4A]">
       <Link href="/">
         <h1 className="font-bold text-2xl">AlphaLabs</h1>
       </Link>
