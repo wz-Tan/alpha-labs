@@ -9,7 +9,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-9 flex-1">
         <Sidebar />
 
-        <main className="text-black w-full h-full col-span-8 bg-[#0A1628]">
+        <main className="text-[#C8D8EB] w-full h-full col-span-8 bg-[#0A1628]">
           This is the Strategies Page
         </main>
       </div>

@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${baskerville.variable} h-full antialiased text-black`}
+      className={`${baskerville.variable} h-full antialiased text-[#C8D8EB]`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
