@@ -1,8 +1,15 @@
+"use client";
 import Chart from "../components/chart";
 import { Header } from "../components/header";
 import { Sidebar } from "../components/sidebar";
+import { useEffect } from "react";
+import { getMarket } from "../../api/get_market";
 
 export default function Dashboard() {
+  useEffect(() => {
+    getMarket("Airasia");
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
