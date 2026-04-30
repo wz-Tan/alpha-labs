@@ -52,11 +52,7 @@ export default function Dashboard() {
           </div>
 
           {/* Markets Go Here */}
-          <div className="flex flex-row gap-4 pt-5">
-            <MarketCard countryName="Malaysia" />
-            <MarketCard countryName="China" />
-            <MarketCard countryName="United States" />
-          </div>
+          <div className="flex flex-col gap-4 pt-5"></div>
         </main>
       </div>
     </div>

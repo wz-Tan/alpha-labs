@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { PiStrategyBold } from "react-icons/pi";
+import { RiStockFill, RiStockLine } from "react-icons/ri";
 import { SiCardmarket } from "react-icons/si";
 
 export function Sidebar() {
@@ -15,6 +16,11 @@ export function Sidebar() {
       <Link href="/markets" className="flex items-center gap-2">
         <SiCardmarket className="text-lg" />
         <h1 className="text-lg">Markets</h1>
+      </Link>
+      
+      <Link href="/stocks" className="flex items-center gap-2">
+        <RiStockLine className="text-lg" />
+        <h1 className="text-lg">Stocks</h1>
       </Link>
 
       <Link href="/strategies" className="flex items-center gap-2">
