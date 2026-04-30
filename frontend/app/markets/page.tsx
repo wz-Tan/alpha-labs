@@ -1,11 +1,15 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "../components/header";
-import MarketCard from "../components/marketCard";
 import { Sidebar } from "../components/sidebar";
+import { getBursa } from "../../api/get_bursa";
 import { IoMdArrowDropdown } from "react-icons/io";
 
 export default function Dashboard() {
+  useEffect(() => {
+    getBursa();
+  }, []);
+
   const countries = ["USA", "Malaysia", "UK"];
   const [currentCountry, setCurrentCountry] = useState(countries[0]);
   const [showCountries, setShowCountries] = useState(false);

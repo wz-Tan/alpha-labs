@@ -3,11 +3,11 @@ import Chart from "../components/chart";
 import { Header } from "../components/header";
 import { Sidebar } from "../components/sidebar";
 import { useEffect } from "react";
-import { getMarket } from "../../api/get_market";
+import { getTicker } from "../../api/get_ticker";
 
 export default function Dashboard() {
   useEffect(() => {
-    getMarket("Airasia");
+    getTicker("AAPL");
   }, []);
 
   return (

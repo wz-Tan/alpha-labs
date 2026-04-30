@@ -1,3 +1,4 @@
+from datasets import get_all_bursa_tickers, get_ticker
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
 
@@ -14,7 +15,19 @@ def root():
 def get_market():
     body = request.get_json()
     market_name = body.get("marketName")
-    print("Requested market name is", market_name)
+    duration = body.get("duration")
+
+    # Get Ticker
+    get_ticker(market_name, duration)
+
+    return {"status": "ok"}
+
+
+@app.route("/get_bursa", methods=["GET"])
+def get_bursa():
+
+    # Get All Malaysian Stocks
+    get_all_bursa_tickers()
 
     return {"status": "ok"}
 
