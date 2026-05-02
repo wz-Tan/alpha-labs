@@ -7,7 +7,8 @@ import { getTicker } from "../../api/get_ticker";
 
 export default function Dashboard() {
   useEffect(() => {
-    getTicker("AAPL");
+    const data = getTicker("AAPL").then((res) => res.json());
+    console.log("Data is ", data);
   }, []);
 
   return (
@@ -19,7 +20,7 @@ export default function Dashboard() {
         <main className="text-[#C8D8EB] flex flex-col p-8 w-full h-full col-span-8 bg-[#0A1628]">
           {/* Row for Stock Information */}
           <div className="flex flex-row">
-            <h1 className="text-4xl">AAX</h1>
+            <h1 className="text-4xl">AAPL</h1>
           </div>
 
           {/* Actual Stock Here */}

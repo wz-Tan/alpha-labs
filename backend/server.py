@@ -13,14 +13,21 @@ def root():
 
 @app.route("/get_market", methods=["POST"])
 def get_market():
-    body = request.get_json()
-    market_name = body.get("marketName")
-    duration = body.get("duration")
+    try:
+        body = request.get_json()
+        market_name = body.get("marketName")
+        duration = body.get("duration")
 
-    # Get Ticker
-    get_ticker(market_name, duration)
+        print("Getting ticker data for ", market_name)
 
-    return {"status": "ok"}
+        # Get Ticker
+        ticker_data = get_ticker(market_name, duration)
+        print("Ticker data is ", ticker_data)
+
+        return {"ticker_data": ticker_data}
+
+    except Exception as e:
+        return {"error": e}
 
 
 @app.route("/get_bursa", methods=["GET"])

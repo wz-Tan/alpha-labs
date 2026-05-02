@@ -48,8 +48,12 @@ def get_all_bursa_tickers():
 
 
 def get_ticker(market_name: str, duration: str = "1mo"):
-    print("Getting the ticker for ", market_name)
     ticker = yf.Ticker(market_name)
 
     df = ticker.history(period=duration)
-    print(df.head())
+
+    # Process Into 5 Fields First: Date, Open, High, Low, Close
+    df_filtered = df.iloc[:, 0:4]
+    print("Dates are ", df.iloc[0])
+
+    return df_filtered.to_json()

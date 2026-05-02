@@ -7,7 +7,9 @@ export async function getTicker(marketName, duration) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ marketName: marketName }, { duration: duration }),
-  }).then((res) => res.json());
+  }).then(async (res) => await res.json());
 
   console.log("Data is ", data);
+
+  // Parse This Data: Open: {Unix: Value} and Continue On
 }
