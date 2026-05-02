@@ -1,5 +1,5 @@
 from datasets import get_all_bursa_tickers, get_ticker
-from flask import Flask, request
+from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
@@ -15,19 +15,18 @@ def root():
 def get_market():
     try:
         body = request.get_json()
-        market_name = body.get("marketName")
+        ticker_name = body.get("tickerName")
         duration = body.get("duration")
 
-        print("Getting ticker data for ", market_name)
+        print("Getting ticker data for ", ticker_name)
 
         # Get Ticker
-        ticker_data = get_ticker(market_name, duration)
-        print("Ticker data is ", ticker_data)
+        ticker_data = get_ticker(ticker_name, duration)
 
-        return {"ticker_data": ticker_data}
+        return jsonify({"ticker_data": ticker_data})
 
     except Exception as e:
-        return {"error": e}
+        return {"error": str(e)}, 500
 
 
 @app.route("/get_bursa", methods=["GET"])

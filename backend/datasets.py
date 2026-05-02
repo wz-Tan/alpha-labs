@@ -47,8 +47,8 @@ def get_all_bursa_tickers():
     print(tickers)
 
 
-def get_ticker(market_name: str, duration: str = "1mo"):
-    ticker = yf.Ticker(market_name)
+def get_ticker(ticker_name: str, duration: str = "1mo"):
+    ticker = yf.Ticker(ticker_name)
 
     df = ticker.history(period=duration)
 
