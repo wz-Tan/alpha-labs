@@ -23,7 +23,7 @@ export default function Stocks() {
     "6mo": "6M",
     "1y": "1Y",
     "5y": "5Y",
-    "max": "Max",
+    max: "Max",
   };
 
   useEffect(() => {
@@ -56,13 +56,22 @@ export default function Stocks() {
           {/* Stock Info and Input Field */}
           <div className="flex flex-col gap-4">
             <div className="flex flex-row justify-between items-center">
-              <h1 className="text-4xl">{tickerName}</h1>
+              <h1 className="text-3xl">{tickerName}</h1>
               {/* Choose Company Name*/}
               <div className="flex flex-row gap-2 items-center">
                 <input
                   type="text"
                   value={tickerInput}
                   onChange={(e) => setTickerInput(e.target.value.toUpperCase())}
+                  // Update on Enter As Well
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      if (tickerInput.trim()) {
+                        setTickerName(tickerInput);
+                        setTickerInput("");
+                      }
+                    }
+                  }}
                   placeholder="Enter ticker symbol"
                   className="px-3 py-2 bg-[#0F2040] text-[#C8D8EB] border border-[#1A2E4A] rounded focus:outline-none focus:border-[#60A5FA]"
                 />
