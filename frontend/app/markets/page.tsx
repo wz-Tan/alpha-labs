@@ -5,7 +5,7 @@ import { Sidebar } from "../components/sidebar";
 import { getBursa } from "../../api/get_bursa";
 import { IoMdArrowDropdown } from "react-icons/io";
 
-export default function Dashboard() {
+export default function Markets() {
   useEffect(() => {
     getBursa();
   }, []);

@@ -2,23 +2,37 @@
 import Chart from "../components/chart";
 import { Header } from "../components/header";
 import { Sidebar } from "../components/sidebar";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getTicker } from "../../api/get_ticker";
 import { ChartData } from "../types";
 
-export default function Dashboard() {
+export default function Stocks() {
+  const chartRef = useRef<HTMLDivElement>(null);
   const [chartData, setChartData] = useState<ChartData[]>([]);
+  const [chartDimensions, setChartDimensions] = useState({
+    width: 0,
+    height: 0,
+  });
   const tickerName = "AAPL";
 
   useEffect(() => {
     async function initTickerData() {
-      const data = await getTicker(tickerName, "12mo");
+      const data = await getTicker(tickerName, "60mo");
       if (data) {
         setChartData(data);
       }
     }
 
+    // Get Ticker Data
     initTickerData();
+
+    // Get Chart Div Size
+    if (chartRef.current) {
+      setChartDimensions({
+        width: chartRef.current.offsetWidth,
+        height: chartRef.current.offsetHeight,
+      });
+    }
   }, []);
 
   return (
@@ -34,8 +48,17 @@ export default function Dashboard() {
           </div>
 
           {/* Actual Stock Here */}
-          <div className="flex flex-1 bg-black mt-4 rounded-lg p-4">
-            {chartData.length > 0 && <Chart data={chartData} />}
+          <div
+            className="flex flex-1 mt-4 rounded-md border-2 border-[#1A2E4A]"
+            ref={chartRef}
+          >
+            {chartData.length > 0 && (
+              <Chart
+                data={chartData}
+                width={chartDimensions.width}
+                height={chartDimensions.height}
+              />
+            )}
           </div>
         </main>
       </div>

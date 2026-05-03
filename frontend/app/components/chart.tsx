@@ -18,7 +18,7 @@ const dummyData = [
 
 export default function Chart({
   height = 800,
-  width = 1500,
+  width = 1600,
   data = dummyData,
 }: {
   height: number;
@@ -35,7 +35,32 @@ export default function Chart({
       width: width,
       height: height,
     });
+
+    chart.applyOptions({
+      layout: {
+        background: {
+          color: "#0F2040",
+        },
+        textColor: "#FFFFFF",
+        fontSize: 14,
+        fontFamily: "Libre_Baskerville",
+      },
+      grid: {
+        vertLines: {
+          visible: false,
+        },
+        horzLines: {
+          visible: false,
+        },
+      },
+    });
+
     const lineSeries = chart.addSeries(CandlestickSeries);
+
+    lineSeries.applyOptions({
+      upColor: "#34D399",
+      downColor: "#F87171",
+    });
 
     lineSeries.setData(data);
 

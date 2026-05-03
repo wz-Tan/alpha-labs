@@ -1,7 +1,7 @@
 import { Header } from "../components/header";
 import { Sidebar } from "../components/sidebar";
 
-export default function Dashboard() {
+export default function Strategies() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
