@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import { runAlpha } from "@/api/run_alpha";
 
 export function Header() {
   return (
@@ -6,7 +8,12 @@ export function Header() {
       <Link href="/">
         <h1 className="font-bold text-2xl">AlphaLabs</h1>
       </Link>
-      <h1 className="text-xl">▶</h1>
+      <button
+        onClick={runAlpha}
+        className="text-xl hover:bg-[#162B50] hover:text-[#FFFFFF] px-3 py-2 rounded transition-colors cursor-pointer"
+      >
+        ▶
+      </button>
       <h1 className="text-xl">Sign Up</h1>
     </div>
   );

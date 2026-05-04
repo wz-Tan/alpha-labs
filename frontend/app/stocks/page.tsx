@@ -108,7 +108,7 @@ export default function Stocks() {
 
           {/* Actual Stock Here */}
           <div
-            className="flex flex-1 mt-4 rounded-md border-2 border-[#1A2E4A]"
+            className="flex flex-1 mt-4 rounded-md border-2 border-[#1A2E4A] bg-[#0F2040]"
             ref={chartRef}
           >
             {chartData.length > 0 && (
