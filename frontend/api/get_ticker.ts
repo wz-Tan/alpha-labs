@@ -40,7 +40,6 @@ export async function getTicker(tickerName: string, duration: string) {
     }
 
     return formatted_ticker_data;
-    
   } catch (exception) {
     console.error("Error!", exception);
   }

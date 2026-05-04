@@ -9,5 +9,6 @@ export async function runAlpha() {
     body: JSON.stringify({ alpha: "Buy high sell low" }),
   }).then((res) => res.json());
 
-  console.log("Data is ", data);
+  // Dates Whereby the Alpha Was Run
+  return data;
 }

@@ -1,3 +1,4 @@
+import pandas as pd
 from cache import get_cached_ticker, set_cached_ticker
 from datasets import get_all_bursa_tickers, get_ticker
 from flask import Flask, jsonify, request
@@ -23,11 +24,11 @@ def get_market():
         print("Getting ticker data for ", ticker_name)
 
         # Get Ticker
-        ticker_data = get_ticker(ticker_name, duration)
+        ticker_data: pd.DataFrame = get_ticker(ticker_name, duration)
 
         set_cached_ticker(ticker_data)
 
-        return jsonify({"ticker_data": ticker_data})
+        return jsonify({"ticker_data": ticker_data.to_json()})
 
     except Exception as e:
         return {"error": str(e)}, 500
@@ -48,9 +49,11 @@ def handle_run_alpha():
     try:
         body = request.get_json()
 
-        run_alpha(get_cached_ticker())
+        cached_ticker = get_cached_ticker()
 
-        return jsonify({"status": "Alpha has been run"})
+        open_dates = run_alpha(cached_ticker)
+
+        return jsonify({"dates": open_dates})
 
     except Exception as e:
         return {"error": str(e)}, 500

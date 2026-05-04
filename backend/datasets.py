@@ -54,6 +54,6 @@ def get_ticker(ticker_name: str, duration: str = "1mo"):
 
     # Process Into 5 Fields First: Date, Open, High, Low, Close
     df_filtered = df.iloc[:, 0:4]
-    print("Dates are ", df.iloc[0])
+    print("Filtered dataframe is ", df_filtered)
 
-    return df_filtered.to_json()
+    return df_filtered
