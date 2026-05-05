@@ -2,17 +2,15 @@
 import Chart from "../components/chart";
 import { Header } from "../components/header";
 import { Sidebar } from "../components/sidebar";
-import { useEffect, useRef, useState } from "react";
+import { Context, useEffect, useRef, useState } from "react";
 import { getTicker } from "../../api/get_ticker";
-import { ChartData } from "../types";
+
+import { useAlphaContext } from "../contexts/alphaContext";
 
 export default function Stocks() {
   const chartRef = useRef<HTMLDivElement>(null);
-  const [chartData, setChartData] = useState<ChartData[]>([]);
-  const [chartDimensions, setChartDimensions] = useState({
-    width: 0,
-    height: 0,
-  });
+  const { chartData, setChartData, chartDimensions, setChartDimensions } =
+    useAlphaContext();
   const [tickerInput, setTickerInput] = useState("");
   const [tickerName, setTickerName] = useState("AAPL");
   const [timeframe, setTimeframe] = useState("60mo");

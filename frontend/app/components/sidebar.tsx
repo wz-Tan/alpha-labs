@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { PiStrategyBold } from "react-icons/pi";
-import { RiStockFill, RiStockLine } from "react-icons/ri";
+import { RiStockLine } from "react-icons/ri";
 import { SiCardmarket } from "react-icons/si";
 
 export function Sidebar() {

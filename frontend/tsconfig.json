@@ -29,7 +29,7 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts",
-    "api/get_ticker.ts",
+    "api/get_ticker.ts", "app/contexts/alphaContext.tsx",
   ],
   "exclude": ["node_modules"],
 }

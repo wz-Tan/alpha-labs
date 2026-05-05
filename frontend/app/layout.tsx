@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Libre_Baskerville } from "next/font/google";
 import "./globals.css";
+import { AlphaContextProvider } from "./contexts/alphaContext";
 
 const baskerville = Libre_Baskerville({
   subsets: ["latin"],
@@ -23,7 +24,9 @@ export default function RootLayout({
       lang="en"
       className={`${baskerville.variable} h-full antialiased text-[#C8D8EB]`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <AlphaContextProvider>{children}</AlphaContextProvider>
+      </body>
     </html>
   );
 }
