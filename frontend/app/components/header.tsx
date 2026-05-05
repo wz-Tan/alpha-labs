@@ -3,6 +3,7 @@ import Link from "next/link";
 import { runAlpha } from "@/api/run_alpha";
 
 export function Header() {
+  
   return (
     <div className="bg-[#0F2040] border-b justify-between items-center flex flex-row w-full p-4 px-8 text-[#C8D8EB] border-[#1A2E4A] sticky top-0">
       <Link href="/">

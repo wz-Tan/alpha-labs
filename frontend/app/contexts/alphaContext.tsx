@@ -1,9 +1,9 @@
 "use client";
 // This context is used for the frontend to preserve the current chart and for running an alpha to alter the values
 import { createContext, ReactNode, useContext, useState } from "react";
-import { ChartData } from "../types";
+import { AlphaContextType, ChartData } from "../types";
 
-const AlphaContext = createContext();
+const AlphaContext = createContext<AlphaContextType | null>(null);
 
 export function AlphaContextProvider({ children }: { children: ReactNode }) {
   const [chartData, setChartData] = useState<ChartData[]>([]);

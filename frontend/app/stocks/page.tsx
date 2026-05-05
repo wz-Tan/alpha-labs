@@ -6,11 +6,12 @@ import { Context, useEffect, useRef, useState } from "react";
 import { getTicker } from "../../api/get_ticker";
 
 import { useAlphaContext } from "../contexts/alphaContext";
+import { AlphaContextType } from "../types";
 
 export default function Stocks() {
   const chartRef = useRef<HTMLDivElement>(null);
   const { chartData, setChartData, chartDimensions, setChartDimensions } =
-    useAlphaContext();
+    useAlphaContext() as AlphaContextType;
   const [tickerInput, setTickerInput] = useState("");
   const [tickerName, setTickerName] = useState("AAPL");
   const [timeframe, setTimeframe] = useState("60mo");
