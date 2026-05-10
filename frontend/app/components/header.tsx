@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { runAlpha } from "@/api/run_alpha";
 import { useAlphaContext } from "../contexts/alphaContext";
-import { AlphaContextType, AlphaReturnObject } from "../types";
+import { AlphaContextType, AlphaReturnType } from "../types";
 
 export function Header() {
   const { setValidDates } = useAlphaContext() as AlphaContextType;
@@ -14,7 +14,7 @@ export function Header() {
       </Link>
       <button
         onClick={async () => {
-          const { dates } = (await runAlpha()) as AlphaReturnObject;
+          const { dates } = (await runAlpha()) as AlphaReturnType;
           setValidDates(dates);
         }}
         className="text-xl hover:bg-[#162B50] hover:text-[#FFFFFF] px-3 py-2 rounded transition-colors cursor-pointer"

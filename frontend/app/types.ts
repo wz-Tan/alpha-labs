@@ -17,6 +17,6 @@ export interface AlphaContextType {
   setValidDates: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export interface AlphaReturnObject {
+export interface AlphaReturnType {
   dates: string[];
 }

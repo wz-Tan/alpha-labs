@@ -3,6 +3,7 @@ from cache import get_cached_ticker, set_cached_ticker
 from datasets import get_all_bursa_tickers, get_ticker
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from models import Alpha_Return_Type
 from strategies import run_alpha
 
 app = Flask(__name__)
@@ -49,11 +50,13 @@ def handle_run_alpha():
     try:
         body = request.get_json()
 
+        alpha = body.get("alpha")
+
         cached_ticker = get_cached_ticker()
 
-        open_dates = run_alpha(cached_ticker)
+        alpha_return_object: Alpha_Return_Type = run_alpha(cached_ticker)
 
-        return jsonify({"dates": open_dates})
+        return jsonify(alpha_return_object.to_dict())
 
     except Exception as e:
         return {"error": str(e)}, 500
