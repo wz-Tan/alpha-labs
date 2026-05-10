@@ -110,13 +110,7 @@ export default function Stocks() {
             className="flex flex-1 mt-4 rounded-md border-2 border-[#1A2E4A] bg-[#0F2040]"
             ref={chartRef}
           >
-            {chartData.length > 0 && (
-              <Chart
-                data={chartData}
-                width={chartDimensions.width}
-                height={chartDimensions.height}
-              />
-            )}
+            {chartData.length > 0 && <Chart />}
           </div>
         </main>
       </div>

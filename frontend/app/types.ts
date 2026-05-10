@@ -14,3 +14,8 @@ export interface AlphaContextType {
     React.SetStateAction<{ width: number; height: number }>
   >;
 }
+
+export interface HightlightRange {
+  dates: string[];
+  colour: string;
+}
