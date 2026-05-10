@@ -19,7 +19,8 @@ const dummyDataForPanels = [
 
 export default function Chart() {
   // Pull Data from Context
-  const { chartData, chartDimensions } = useAlphaContext() as AlphaContextType;
+  const { chartData, chartDimensions, validDates } =
+    useAlphaContext() as AlphaContextType;
 
   // Create Reference to Draw On
   const containerRef = useRef<HTMLDivElement>(null);
@@ -37,7 +38,7 @@ export default function Chart() {
         background: {
           color: "#0F2040",
         },
-        textColor: "#FFFFFF",
+        textColor: "#666666",
         fontSize: 14,
         fontFamily: "Libre_Baskerville",
       },
@@ -58,11 +59,33 @@ export default function Chart() {
       downColor: "#F87171",
     });
 
-    lineSeries.setData(chartData);
+    // Non-Filtered Candle Set
+    if (validDates[0] === "RESET") {
+      lineSeries.setData(chartData);
+      return () => chart.remove();
+    }
+
+    // Build a Set for O(1) lookups
+    const validDateSet = new Set(validDates);
+
+    // Label Non Valid Dates as Gray (Only if There Are Valid Dates after Alpha)
+    const coloredData = chartData.map((candle) => {
+      const isValid = validDateSet.has(candle.time);
+      return isValid
+        ? candle
+        : {
+            ...candle,
+            color: "#666666", // candle body
+            wickColor: "#666666", // wick
+            borderColor: "#666666", // border
+          };
+    });
+
+    lineSeries.setData(coloredData);
 
     // Clear Canvas Object when Returned
     return () => chart.remove();
-  }, [chartDimensions.height, chartDimensions.height, chartData]);
+  }, [chartDimensions.height, chartDimensions.width, chartData, validDates]);
 
   return <div className="flex flex-1" ref={containerRef} />;
 }

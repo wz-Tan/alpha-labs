@@ -13,9 +13,10 @@ export interface AlphaContextType {
   setChartDimensions: React.Dispatch<
     React.SetStateAction<{ width: number; height: number }>
   >;
+  validDates: string[];
+  setValidDates: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export interface HightlightRange {
+export interface AlphaReturnObject {
   dates: string[];
-  colour: string;
 }

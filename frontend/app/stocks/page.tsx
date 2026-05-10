@@ -10,7 +10,7 @@ import { AlphaContextType } from "../types";
 
 export default function Stocks() {
   const chartRef = useRef<HTMLDivElement>(null);
-  const { chartData, setChartData, chartDimensions, setChartDimensions } =
+  const { chartData, setChartData, setValidDates, setChartDimensions } =
     useAlphaContext() as AlphaContextType;
   const [tickerInput, setTickerInput] = useState("");
   const [tickerName, setTickerName] = useState("AAPL");
@@ -30,6 +30,7 @@ export default function Stocks() {
       const data = await getTicker(tickerName, timeframe);
       if (data) {
         setChartData(data);
+        setValidDates(["RESET"]);
       }
     }
 
