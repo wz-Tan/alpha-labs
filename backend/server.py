@@ -59,6 +59,7 @@ def handle_run_alpha():
         return jsonify(alpha_return_object.to_dict())
 
     except Exception as e:
+        print("Error running alpha ", e)
         return {"error": str(e)}, 500
 
 

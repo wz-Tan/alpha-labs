@@ -28,41 +28,29 @@ def golden_cross(ticker_data: pd.DataFrame):
     entry_dates = []
     current_entry = ""
 
-    # Golden Cross (50MA > 200MA)
-    for index, value in ticker_data.iterrows():
-        # Pop Out Excess Data
-        if len(list50ma) == 50:
-            list50ma.pop(0)
+    print("Ticker data is ", ticker_data.head())
 
-        if len(list200ma) == 200:
-            list200ma.pop(0)
+    # Get the Series
+    close_values = ticker_data["Close"]
 
-        # Fill In Data
-        close_value = value["Close"]
+    # Mean of Previous Days
+    ma50 = close_values.rolling(50).mean()
+    ma200 = close_values.rolling(200).mean()
 
-        list50ma.append(close_value)
-        list200ma.append(close_value)
+    # Select Valid Rows (True or False)
+    matched_golden_cross = ma50 > ma200
+    matched_death_cross = ma50 < ma200
 
-        # Logic Goes Here (If Average 50 > Average 200 - Record Date to Entry)
-        if (
-            np.mean(list50ma) > np.mean(list200ma)
-            and len(list50ma) == 50
-            and len(list200ma) == 200
-            and current_entry == ""
-        ):
-            current_entry = index.strftime("%Y-%m-%d")
+    # Filter out NaNs (Date not Matched Yet)
+    is_valid = ma50.notna() & ma200.notna()
 
-        # Exit Condition (MA200 > MA50)
-        elif (
-            np.mean(list50ma) < np.mean(list200ma)
-            and len(list50ma) == 50
-            and len(list200ma) == 200
-            and current_entry
-        ):
-            current_entry = ""
+    # Compare The Rows Where Both are True
+    golden_cross = matched_golden_cross & is_valid
 
-        # Within Entry Period
-        if current_entry:
-            entry_dates.append(index.strftime("%Y-%m-%d"))
+    print("Dates meeting golden cross ", golden_cross)
+
+    # Acquire the Dates for the Entry Points (Golden_Cross series is used for true false values)
+    entry_dates = ticker_data.index[golden_cross].strftime("%Y-%m-%d").tolist()
+    print("Entry dates are ", entry_dates)
 
     return entry_dates
