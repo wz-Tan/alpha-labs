@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import numpy as np
 import pandas as pd
 from models import Alpha_Return_Type
@@ -22,12 +24,8 @@ def run_alpha(ticker_data: pd.DataFrame, stop_loss: float = 0.05):
 
 
 def golden_cross(ticker_data: pd.DataFrame):
-    list50ma = []
-    list200ma = []
 
     entry_dates = []
-    current_entry = ""
-
     print("Ticker data is ", ticker_data.head())
 
     # Get the Series
@@ -37,20 +35,33 @@ def golden_cross(ticker_data: pd.DataFrame):
     ma50 = close_values.rolling(50).mean()
     ma200 = close_values.rolling(200).mean()
 
-    # Select Valid Rows (True or False)
-    matched_golden_cross = ma50 > ma200
-    matched_death_cross = ma50 < ma200
-
     # Filter out NaNs (Date not Matched Yet)
     is_valid = ma50.notna() & ma200.notna()
 
     # Compare The Rows Where Both are True
-    golden_cross = matched_golden_cross & is_valid
+    matched_golden_cross = (ma50 > ma200) & is_valid
+    matched_death_cross = (ma50 < ma200) & is_valid
 
-    print("Dates meeting golden cross ", golden_cross)
+    # Acquire CLEAN Entry and Exit Rows (Valid Today, But Was False Yesterday - Fresh Entry and Exits)
+    golden_cross = matched_golden_cross & ~matched_golden_cross.shift(1).fillna(False)
+    death_cross = matched_death_cross & ~matched_death_cross.shift(1).fillna(False)
 
-    # Acquire the Dates for the Entry Points (Golden_Cross series is used for true false values)
-    entry_dates = ticker_data.index[golden_cross].strftime("%Y-%m-%d").tolist()
-    print("Entry dates are ", entry_dates)
+    # Acquire the Dates for the Entry Points (TimeStamp Objects)
+    entry_dates = ticker_data.index[golden_cross]
+    exit_dates = ticker_data.index[death_cross]
 
-    return entry_dates
+    # Filter Out Dates to Hold (Keep Holding Until You Hit an Exit) - So Basically The Dates Between Entry Point and Exit Point
+    print("Golden cross dates are ", entry_dates)
+    print("Death cross dates are ", exit_dates)
+
+    calculate_earnings(ticker_data, entry_dates, exit_dates)
+
+    return entry_dates.strftime("%Y-%m-%d").tolist()
+
+
+# Calculate P/L Over All Entries and Exits
+def calculate_earnings(ticker_data: pd.DataFrame, entry_dates, exit_dates):
+    print("Entries are ", entry_dates)
+    print("Exits are ", exit_dates)
+
+    # Calculate Price Differences Here
