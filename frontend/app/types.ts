@@ -15,6 +15,8 @@ export interface AlphaContextType {
   >;
   validDates: string[];
   setValidDates: React.Dispatch<React.SetStateAction<string[]>>;
+  tickerName: string;
+  setTickerName: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export interface AlphaReturnType {

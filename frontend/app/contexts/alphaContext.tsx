@@ -6,6 +6,7 @@ import { AlphaContextType, ChartData } from "../types";
 const AlphaContext = createContext<AlphaContextType | null>(null);
 
 export function AlphaContextProvider({ children }: { children: ReactNode }) {
+  const [tickerName, setTickerName] = useState("");
   const [chartData, setChartData] = useState<ChartData[]>([]);
   const [chartDimensions, setChartDimensions] = useState({
     width: 0,
@@ -24,6 +25,8 @@ export function AlphaContextProvider({ children }: { children: ReactNode }) {
         setChartDimensions,
         validDates,
         setValidDates,
+        tickerName,
+        setTickerName,
       }}
     >
       {children}
