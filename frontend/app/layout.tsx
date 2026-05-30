@@ -25,7 +25,7 @@ export default function RootLayout({
       lang="en"
       className={`${baskerville.variable} h-full antialiased text-[#C8D8EB]`}
     >
-      <body className="min-h-screen flex flex-col">
+      <body className="h-screen flex flex-col">
         <AlphaContextProvider>
           <Header />
           {children}

@@ -10,13 +10,6 @@ def run_alpha(ticker_data: pd.DataFrame, stop_loss: float = 0.05):
 
     entry_dates = golden_cross(ticker_data)
 
-    # Mark for Openings That Are Higher Than Previous Closes
-    # Move Closing Values Down by 1 for comparison
-    # entry_dates = (
-    #     (ticker_data.index[ticker_data["Open"] > ticker_data["Close"].shift(1)])
-    #     .strftime("%Y-%m-%d")
-    #     .tolist()
-    # )
 
     alpha_return_object = Alpha_Return_Type(dates=entry_dates)
 

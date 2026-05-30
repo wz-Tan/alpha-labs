@@ -49,9 +49,9 @@ export default function Stocks() {
   }, [tickerName, timeframe]);
 
   return (
-    <main className="text-[#C8D8EB] flex flex-col p-4 px-8 w-full flex-1 bg-[#0A1628]">
+    <main className="text-[#C8D8EB] flex flex-col p-4 px-8 w-full flex-1 bg-[#0A1628] min-h-0">
       {chartData.length > 0 ? (
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-col flex-1 gap-4">
           {/* Ticker + Timeframe */}
           <div className="flex gap-4 justify-between items-center">
             <h1 className="text-2xl">{tickerName}</h1>
@@ -75,7 +75,7 @@ export default function Stocks() {
           {/* Chart */}
           <div
             ref={chartRef}
-            className="flex-1 rounded-md border-2 border-[#1A2E4A] bg-[#0F2040]"
+            className="flex-1 rounded-md border-2 border-[#1A2E4A] bg-[#0F2040] min-h-0"
           >
             <Chart />
           </div>
