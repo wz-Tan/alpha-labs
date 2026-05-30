@@ -26,12 +26,20 @@ export default function Chart() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    console.log("Chart use effect called");
     if (!containerRef.current) return;
 
+    console.log("Container ref is found");
+
     const chart = createChart(containerRef.current, {
-      width: chartDimensions.width,
-      height: chartDimensions.height,
+      autoSize: true,
     });
+
+    console.log(
+      "Width and height of chart is ",
+      chartDimensions.width,
+      chartDimensions.height,
+    );
 
     chart.applyOptions({
       layout: {
@@ -62,6 +70,7 @@ export default function Chart() {
     // Non-Filtered Candle Set
     if (validDates[0] === "RESET") {
       lineSeries.setData(chartData);
+      console.log("Set data to chart", chartData);
       return () => chart.remove();
     }
 
@@ -87,5 +96,5 @@ export default function Chart() {
     return () => chart.remove();
   }, [chartDimensions.height, chartDimensions.width, chartData, validDates]);
 
-  return <div className="flex flex-1" ref={containerRef} />;
+  return <div className="w-full h-full" ref={containerRef} />;
 }

@@ -13,7 +13,6 @@ export default function Stocks() {
     chartData,
     setChartData,
     setValidDates,
-    setChartDimensions,
     tickerName,
   } = useAlphaContext() as AlphaContextType;
   const [timeframe, setTimeframe] = useState("60mo");
@@ -33,19 +32,12 @@ export default function Stocks() {
       if (data) {
         setChartData(data);
         setValidDates(["RESET"]);
+        console.log("set chart data");
       }
     }
 
     // Get Ticker Data
     initTickerData();
-
-    // Get Chart Div Size
-    if (chartRef.current) {
-      setChartDimensions({
-        width: chartRef.current.offsetWidth,
-        height: chartRef.current.offsetHeight,
-      });
-    }
   }, [tickerName, timeframe]);
 
   return (
