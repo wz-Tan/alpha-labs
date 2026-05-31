@@ -71,6 +71,7 @@ export default function Chart() {
     if (validDates[0] === "RESET") {
       lineSeries.setData(chartData);
       console.log("Set data to chart", chartData);
+      chart.timeScale().fitContent();
       return () => chart.remove();
     }
 
@@ -91,6 +92,7 @@ export default function Chart() {
     });
 
     lineSeries.setData(coloredData);
+    chart.timeScale().fitContent();
 
     // Clear Canvas Object when Returned
     return () => chart.remove();

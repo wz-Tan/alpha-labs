@@ -1,7 +1,7 @@
 "use client";
 import Chart from "../components/chart";
-import { Header } from "../components/header";
-import { Context, useEffect, useRef, useState } from "react";
+
+import { useEffect, useRef, useState } from "react";
 import { getTicker } from "../../api/get_ticker";
 
 import { useAlphaContext } from "../contexts/alphaContext";
@@ -9,12 +9,9 @@ import { AlphaContextType } from "../types";
 
 export default function Stocks() {
   const chartRef = useRef<HTMLDivElement>(null);
-  const {
-    chartData,
-    setChartData,
-    setValidDates,
-    tickerName,
-  } = useAlphaContext() as AlphaContextType;
+  const [isLoading, setIsLoading] = useState(false);
+  const { chartData, setChartData, setValidDates, tickerName } =
+    useAlphaContext() as AlphaContextType;
   const [timeframe, setTimeframe] = useState("60mo");
   const timeframeOptions = ["1mo", "3mo", "6mo", "1y", "5y", "max"];
   const timeframeLabels: { [key: string]: string } = {
@@ -28,17 +25,26 @@ export default function Stocks() {
 
   useEffect(() => {
     async function initTickerData() {
+      setIsLoading(true);
       const data = await getTicker(tickerName, timeframe);
       if (data) {
         setChartData(data);
         setValidDates(["RESET"]);
-        console.log("set chart data");
       }
+      setIsLoading(false);
     }
 
     // Get Ticker Data
     initTickerData();
   }, [tickerName, timeframe]);
+
+  if (isLoading) {
+    return (
+      <main className="text-[#C8D8EB] flex flex-col p-4 px-8 w-full flex-1 bg-[#0A1628] min-h-0">
+        <h1 className="text-2xl">Loading...</h1>
+      </main>
+    );
+  }
 
   return (
     <main className="text-[#C8D8EB] flex flex-col p-4 px-8 w-full flex-1 bg-[#0A1628] min-h-0">
@@ -73,7 +79,7 @@ export default function Stocks() {
           </div>
         </div>
       ) : (
-        <h1 className="text-2xl p-4">Sorry. Something went wrong.</h1>
+        <h1 className="text-2xl">Sorry. Something went wrong.</h1>
       )}
     </main>
   );
