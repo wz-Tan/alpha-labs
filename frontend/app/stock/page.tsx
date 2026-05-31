@@ -10,7 +10,7 @@ import { AlphaContextType } from "../types";
 export default function Stocks() {
   const chartRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { chartData, setChartData, setValidDates, tickerName } =
+  const { chartData, setChartData, tickerName } =
     useAlphaContext() as AlphaContextType;
   const [timeframe, setTimeframe] = useState("60mo");
   const timeframeOptions = ["1mo", "3mo", "6mo", "1y", "5y", "max"];
@@ -29,7 +29,6 @@ export default function Stocks() {
       const data = await getTicker(tickerName, timeframe);
       if (data) {
         setChartData(data);
-        setValidDates(["RESET"]);
       }
       setIsLoading(false);
     }
@@ -41,7 +40,7 @@ export default function Stocks() {
   if (isLoading) {
     return (
       <main className="text-[#C8D8EB] flex flex-col p-4 px-8 w-full flex-1 bg-[#0A1628] min-h-0">
-        <h1 className="text-2xl">Loading...</h1>
+        <h1 className="text-2xl m-auto">Loading...</h1>
       </main>
     );
   }
@@ -79,7 +78,7 @@ export default function Stocks() {
           </div>
         </div>
       ) : (
-        <h1 className="text-2xl">Sorry. Something went wrong.</h1>
+        <h1 className="text-2xl m-auto">No Data Found.</h1>
       )}
     </main>
   );

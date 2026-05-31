@@ -13,8 +13,6 @@ export interface AlphaContextType {
   setChartDimensions: React.Dispatch<
     React.SetStateAction<{ width: number; height: number }>
   >;
-  validDates: string[];
-  setValidDates: React.Dispatch<React.SetStateAction<string[]>>;
   tickerName: string;
   setTickerName: React.Dispatch<React.SetStateAction<string>>;
 }

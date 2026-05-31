@@ -13,9 +13,6 @@ export function AlphaContextProvider({ children }: { children: ReactNode }) {
     height: 0,
   });
 
-  // Used to Label Valid and Invalid Dates. "RESET" Used for New Ticker instead of Null because alpha might return null
-  const [validDates, setValidDates] = useState<string[]>(["RESET"]);
-
   return (
     <AlphaContext.Provider
       value={{
@@ -23,8 +20,6 @@ export function AlphaContextProvider({ children }: { children: ReactNode }) {
         setChartData,
         chartDimensions,
         setChartDimensions,
-        validDates,
-        setValidDates,
         tickerName,
         setTickerName,
       }}
