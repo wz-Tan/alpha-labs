@@ -23,12 +23,16 @@ export default function Stocks() {
     max: "Max",
   };
 
+  // Purely To Avoid Showing Loading Screen Just From Changing Timeframes
+  const [prevTickerName, setPrevTickerName] = useState("");
+
   useEffect(() => {
     async function initTickerData() {
       setIsLoading(true);
       const data = await getTicker(tickerName, timeframe);
       if (data) {
         setChartData(data);
+        setPrevTickerName(tickerName);
       }
       setIsLoading(false);
     }
@@ -37,7 +41,8 @@ export default function Stocks() {
     initTickerData();
   }, [tickerName, timeframe]);
 
-  if (isLoading) {
+  // Loading When Fetching New Tickers
+  if (isLoading && tickerName != prevTickerName) {
     return (
       <main className="text-[#C8D8EB] flex flex-col p-4 px-8 w-full flex-1 bg-[#0A1628] min-h-0">
         <h1 className="text-2xl m-auto">Loading...</h1>
