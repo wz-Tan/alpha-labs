@@ -1,8 +1,8 @@
 "use client";
 import { CandlestickSeries, createChart } from "lightweight-charts";
 import { useEffect, useRef } from "react";
-import { AlphaContextType } from "../types";
 import { useAlphaContext } from "../contexts/alphaContext";
+import { AlphaContextType } from "../types";
 
 const dummyDataForPanels = [
   { time: "2024-01-02" },
@@ -19,27 +19,17 @@ const dummyDataForPanels = [
 
 export default function Chart() {
   // Pull Data from Context
-  const { chartData, chartDimensions } =
-    useAlphaContext() as AlphaContextType;
+  const { chartData, chartDimensions } = useAlphaContext() as AlphaContextType;
 
   // Create Reference to Draw On
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    console.log("Chart use effect called");
     if (!containerRef.current) return;
-
-    console.log("Container ref is found");
 
     const chart = createChart(containerRef.current, {
       autoSize: true,
     });
-
-    console.log(
-      "Width and height of chart is ",
-      chartDimensions.width,
-      chartDimensions.height,
-    );
 
     chart.applyOptions({
       layout: {

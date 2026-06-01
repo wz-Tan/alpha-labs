@@ -1,5 +1,5 @@
 "use client";
-import Chart from "../components/chart";
+import Chart from "../components/Chart";
 
 import { useEffect, useRef, useState } from "react";
 import { getTicker } from "../../api/get_ticker";
@@ -83,7 +83,9 @@ export default function Stocks() {
           </div>
         </div>
       ) : (
-        <h1 className="text-2xl m-auto">No Data Found.</h1>
+        <h1 className="text-2xl m-auto">
+          No Data Found For Ticker {tickerName}.
+        </h1>
       )}
     </main>
   );

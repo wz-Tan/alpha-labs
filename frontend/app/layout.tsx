@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Libre_Baskerville } from "next/font/google";
 import "./globals.css";
 import { AlphaContextProvider } from "./contexts/alphaContext";
-import { Header } from "./components/header";
+import { Header } from "./components/Header";
 
 const baskerville = Libre_Baskerville({
   subsets: ["latin"],
