@@ -9,8 +9,6 @@ def run_alpha(ticker_data: pd.DataFrame, stop_loss: float = 0.05):
     print("Running alpha")
 
     entry_dates = golden_cross(ticker_data)
-
-
     alpha_return_object = Alpha_Return_Type(dates=entry_dates)
 
     return alpha_return_object

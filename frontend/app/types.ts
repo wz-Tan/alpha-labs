@@ -20,3 +20,30 @@ export interface AlphaContextType {
 export interface AlphaReturnType {
   dates: string[];
 }
+
+// Indicator Types
+export interface IndicatorType {
+  description: string;
+  value: string;
+}
+
+interface IndicatorTypeList {
+  RSI14: IndicatorType;
+  MA50: IndicatorType;
+  MA200: IndicatorType;
+}
+
+export const Indicators: IndicatorTypeList = {
+  RSI14: {
+    description: "Relative Strength Index (14 Days)",
+    value: "rsi_14",
+  },
+  MA50: {
+    description: "Moving Average (50 Days)",
+    value: "ma_50",
+  },
+  MA200: {
+    description: "Moving Average (200 Days)",
+    value: "ma_200",
+  },
+};

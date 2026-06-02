@@ -1,9 +1,5 @@
 import React from "react";
-
-const indicators = {
-  RSI: "Relative Strength Index",
-  MA50: "Moving Average 50",
-};
+import { Indicators, IndicatorType } from "../types";
 
 export default function IndicatorSelector({
   setShowIndicator,
@@ -32,14 +28,16 @@ export default function IndicatorSelector({
 
         {/* Map Out Indicators */}
         <div className="flex flex-col gap-[0.5]">
-          {Object.entries(indicators).map(([key, value]) => {
+          {Object.entries(Indicators).map(([key, value]) => {
+            const item = value as IndicatorType;
+
             return (
               <div
                 key={key}
                 className="text-white text-lg rounded-xl p-2 transition-colors hover:bg-[rgba(150,150,150,0.2)] hover:cursor-pointer"
               >
                 <p>
-                  {key}: {value}
+                  {key}: {item.description}
                 </p>
               </div>
             );
