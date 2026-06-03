@@ -56,7 +56,3 @@ def get_ticker(ticker_name: str, duration: str = "1mo"):
     df_filtered = df.iloc[:, 0:4]
 
     return df_filtered
-
-
-def get_rsi_14():
-    print("Retrive RSI 14")

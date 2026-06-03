@@ -1,10 +1,10 @@
 import pandas as pd
 from cache import get_cached_ticker, set_cached_ticker
-from datasets import get_all_bursa_tickers, get_ticker
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from models import Alpha_Return_Type
 from strategies import run_alpha
+from tickers import get_all_bursa_tickers, get_ticker
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
@@ -49,9 +49,6 @@ def get_bursa():
 def handle_run_alpha():
     try:
         body = request.get_json()
-
-        alpha = body.get("alpha")
-
         cached_ticker = get_cached_ticker()
 
         alpha_return_object: Alpha_Return_Type = run_alpha(cached_ticker)
@@ -61,6 +58,15 @@ def handle_run_alpha():
     except Exception as e:
         print("Error running alpha ", e)
         return {"error": str(e)}, 500
+
+
+# Get Indicators
+@app.route("/get_indicators", methods=["POST"])
+def get_indicators():
+    try:
+        print("Getting indicators")
+    except Exception as e:
+        print("Error getting indicators", e)
 
 
 if __name__ == "__main__":

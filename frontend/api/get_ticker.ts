@@ -1,12 +1,11 @@
 import { ChartData } from "../app/types";
-
-const URL = "http://127.0.0.1:5000";
+import { LOCALHOST_URL } from "./url";
 
 // Ticker Name, and A Duration like "1mo"
 export async function getTicker(tickerName: string, duration: string) {
   try {
     // Get Data, Convert to JSON, Get the Value
-    const data = await fetch(`${URL}/get_market`, {
+    const data = await fetch(`${LOCALHOST_URL}/get_market`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

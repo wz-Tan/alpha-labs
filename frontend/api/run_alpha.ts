@@ -1,11 +1,10 @@
 import { AlphaReturnType } from "@/app/types";
-
-const URL = "http://127.0.0.1:5000";
+import { LOCALHOST_URL } from "./url";
 
 export async function runAlpha() {
   let formattedData: AlphaReturnType = { dates: ["RESET"] };
   try {
-    const data = await fetch(`${URL}/run_alpha`, {
+    const data = await fetch(`${LOCALHOST_URL}/run_alpha`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

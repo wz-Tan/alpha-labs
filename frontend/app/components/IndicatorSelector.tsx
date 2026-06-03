@@ -17,7 +17,7 @@ export default function IndicatorSelector({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between text-2xl mb-4">
-          <h2 className="text-white font-semibold">Indicators</h2>
+          <h2 className="text-white ">Indicators</h2>
           <button
             onClick={() => setShowIndicator(false)}
             className="text-[#5B7FA6] hover:text-[#C8D8EB] hover:cursor-pointer transition-colors"
@@ -34,7 +34,7 @@ export default function IndicatorSelector({
             return (
               <div
                 key={key}
-                className="text-white text-lg rounded-xl p-2 transition-colors hover:bg-[rgba(150,150,150,0.2)] hover:cursor-pointer"
+                className="text-[#60A5FA] text-md rounded-xl p-2 transition-colors hover:bg-[rgba(150,150,150,0.2)] hover:cursor-pointer"
               >
                 <p>
                   {key}: {item.description}
