@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { Libre_Baskerville } from "next/font/google";
+import { Libre_Baskerville, Geist } from "next/font/google";
 import "./globals.css";
 import { AlphaContextProvider } from "./contexts/alphaContext";
 import { Header } from "./components/Header";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const baskerville = Libre_Baskerville({
   subsets: ["latin"],
@@ -23,7 +26,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${baskerville.variable} h-full antialiased text-[#C8D8EB]`}
+      className={cn("h-full", "antialiased", "text-[#C8D8EB]", baskerville.variable, "font-sans", geist.variable)}
     >
       <body className="h-screen flex flex-col">
         <AlphaContextProvider>
