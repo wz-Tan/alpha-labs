@@ -78,6 +78,7 @@ const StrategiesSideBar = () => {
               }`}
             >
               <span className="text-sm truncate">{s.name}</span>
+              {/* Delete Button */}
               <button
                 onClick={(e) => {
                   e.stopPropagation();
